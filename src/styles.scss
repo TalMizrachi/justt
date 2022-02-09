@@ -1,1 +1,14 @@
 /* You can add global styles to this file, and also import other style files */
+:root{
+  --primary:rgba(67, 16, 174, 1) ;
+  --secondary:rgba(239, 239, 253, 1);
+  --darkPrimary:rgba(32, 0, 98, 1);
+  --green:rgba(31, 220, 193, 1);
+  --searchBg:rgba(239, 239, 244, 1);
+}
+body{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Roboto', sans-serif;
+}
