@@ -1,1 +1,17 @@
-<router-outlet></router-outlet>
+<div class="header">
+  <img src="/assets/rm.jpg" width="100%" height="217" alt="">
+  <div class="logo">
+    <img src="/assets/justt.png" alt="">
+    <span class="muted">Rick & Morty Justt</span>
+    <div class="circle"></div>
+  </div>
+</div>
+
+<div class="container">
+    <ul  class="links">
+      <li class="link" [routerLink]="['browse']" routerLinkActive="active"><a  >browse</a></li>
+      <li class="link" [routerLink]="['search']" routerLinkActive="active"><a  >pick a character</a></li>
+    </ul>
+  <router-outlet></router-outlet>
+</div>
+

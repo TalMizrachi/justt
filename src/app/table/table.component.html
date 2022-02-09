@@ -1,0 +1,55 @@
+<div class="container">
+  <form class="search-row">
+    <div class="search-wrap">
+      <input type="text" [(ngModel)]="searchText" [ngModelOptions]="{standalone: true}" name="" id=""
+        [placeholder]="placeHolderText">
+      <img src="/assets/search.svg" alt="">
+    </div>
+    <button *ngIf="isSearchRoute" (click)="searchById(searchText)">GO</button>
+  </form>
+
+  <ng-template #noResultView>
+    <div class="result-wrapper" *ngIf="!searchResult;else profileView">
+      <img src="/assets/noRes.png" alt="">
+      <p>Search for a character id in order to view a character</p>
+    </div>
+
+  </ng-template>
+
+  <ng-template #profileView>
+    <app-profile-view [charcter]="searchResult"></app-profile-view>
+
+  </ng-template>
+
+  <div class="grid-table" *ngIf="charcters.length>0;else noResultView">
+    <div class="headers grid">
+      <div class="header pointer" *ngFor="let header of tableHeaders" (click)="sort(header)">
+        {{header.name}}
+      </div>
+      <div class="header">
+        More
+      </div>
+    </div>
+
+    <div class="table-row grid" *ngFor="let ch of  (charcters | search: searchText) ; let i= index">
+      <span>{{ch.id}}</span>
+      <span>{{ch.name}}</span>
+      <span>{{ch.status}}</span>
+      <span>{{ch.gender}}</span>
+      <span>{{ch.species}}</span>
+      <span>{{ch.episode.length}}</span>
+      <span>{{ch.type}}</span>
+      <span>
+        <svg class="accordion-toggle" data-toggle="collapse" [attr.data-target]="'#ch' + i"
+          [ngClass]="{'active': ch.active}" alt="show more or less" (click)="ch.active= !ch.active" width="11"
+          height="6" viewBox="0 0 11 6" xmlns="http://www.w3.org/2000/svg">
+          <path
+            d="M0.780602 5.72069C0.958339 5.89958 1.19877 6 1.44938 6C1.69999 6 1.94042 5.89958 2.11816 5.72069L5.52372 2.32043L8.88184 5.72069C9.05958 5.89959 9.30001 6 9.55062 6C9.80123 6 10.0417 5.89959 10.2194 5.72069C10.3083 5.63139 10.3789 5.52516 10.427 5.40811C10.4752 5.29106 10.5 5.16552 10.5 5.03871C10.5 4.91191 10.4752 4.78637 10.427 4.66932C10.3789 4.55227 10.3083 4.44604 10.2194 4.35674L6.19724 0.284121C6.10905 0.194092 6.00413 0.122635 5.88854 0.0738707C5.77294 0.025106 5.64895 -4.24093e-07 5.52372 -4.35041e-07C5.39849 -4.45988e-07 5.2745 0.025106 5.1589 0.0738707C5.0433 0.122635 4.93838 0.194092 4.85019 0.284121L0.780603 4.35674C0.69169 4.44604 0.621118 4.55227 0.572957 4.66932C0.524797 4.78637 0.5 4.91191 0.5 5.03871C0.5 5.16551 0.524797 5.29106 0.572957 5.40811C0.621118 5.52516 0.69169 5.63139 0.780602 5.72069Z" />
+        </svg></span>
+        <!-- collapsible content -->
+        <div *ngIf="ch.active" [id]="'ch'+i" class="collapse moreInfo">
+          <app-profile-view [charcter]="ch"></app-profile-view>
+        </div>
+      </div>
+  </div>
+</div>
