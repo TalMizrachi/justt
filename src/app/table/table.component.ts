@@ -41,9 +41,9 @@ export class TableComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     if (!this.isSearchRoute) {
-      this.charactersService.getCharctersByPage(1)
       this.subscriptions.push(this.charactersService.charctersByPage$.subscribe(res => {
-        this.charcters = res
+        res.length>0?this.charcters = res :this.charactersService.getCharctersByPage(1)
+
       }))
     }
   }
